@@ -1,11 +1,11 @@
 export const navigasi = [
   {
     title: "Beranda",
-    href: "#",
+    href: "/",
   },
   {
     title: "Mobil",
-    href: "#",
+    href: "/cars",
   },
   {
     title: "Kontak",

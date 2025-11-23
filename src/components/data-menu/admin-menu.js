@@ -25,7 +25,7 @@ export const AdminMenu = {
     },
     {
       title: "Pemesanan",
-      url: "/admin/order",
+      url: "/admin/pemesanan",
       icon: <KeySquare />,
     },
     {

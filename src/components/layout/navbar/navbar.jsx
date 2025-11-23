@@ -2,11 +2,101 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCarRear } from "@fortawesome/free-solid-svg-icons";
-import { LogIn } from "lucide-react";
+import {
+  LayoutPanelLeft,
+  LogIn,
+  ShoppingBag,
+  SlidersHorizontal,
+} from "lucide-react";
 import Link from "next/link";
 import navigasi from "./navigasi";
+import { getProfileUser } from "@/service/auth.service";
+import { useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Navbar() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const [IsLoading, SetIsLoading] = useState(true);
+  const checkUserLogin = async () => {
+    try {
+      const user = await getProfileUser();
+
+      if (user.status && user.data) {
+        setIsLogin(true);
+        setUserRole(user.data.profile.role);
+      } else {
+        setIsLogin(false);
+        setUserRole(null);
+      }
+    } catch (error) {
+      console.error("Error checking user login:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      await checkUserLogin();
+      SetIsLoading(false);
+    };
+
+    getUser();
+  }, []);
+
+  const roleButton = () => {
+    if (userRole === "admin") {
+      return (
+        <Link
+          href="/admin/dashboard"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+        >
+          <LayoutPanelLeft size={20} />
+          Dashboard
+        </Link>
+      );
+    } else if (userRole === "petugas") {
+      return (
+        <Link
+          href="/petugas/dashboard"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+        >
+          <SlidersHorizontal size={20} />
+          Dashboard
+        </Link>
+      );
+    } else if (userRole === "user") {
+      return (
+        <Link
+          href="/user/dashboard"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+        >
+          <ShoppingBag size={20} />
+          Dashboard
+        </Link>
+      );
+    } else if (userRole === null) {
+      return (
+        <Link
+          href="/auth/login"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+        >
+          <LogIn size={20} />
+          Masuk
+        </Link>
+      );
+    } else {
+      return (
+        <Link
+          href="/auth/login"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+        >
+          <LogIn size={20} />
+          Masuk
+        </Link>
+      );
+    }
+  };
+
   return (
     <header className="w-full bg-white font-geist-sans p-4">
       <nav className="max-w-7xl mx-auto p-2 bg-cyan-sky rounded-lg flex justify-between items-center">
@@ -35,13 +125,18 @@ export default function Navbar() {
           ))}
         </div>
 
-        <Link
+        {IsLoading ? (
+          <Skeleton className="w-32 h-10 rounded-md" />
+        ) : (
+          roleButton()
+        )}
+        {/* <Link
           href="/auth/login"
           className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
         >
           <LogIn size={20} />
           Login
-        </Link>
+        </Link> */}
       </nav>
     </header>
   );

@@ -8,6 +8,7 @@ import {
   Schibsted_Grotesk,
 } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,6 +58,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${rethinkSans.variable} ${schibstedGrotesk.variable} ${beVietnamPro.variable} ${onest.variable} ${instrument.variable} antialiased`}
       >
         {children}
+        <Toaster position="top-right" richColors expand={false} />
       </body>
     </html>
   );

@@ -67,7 +67,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
             .from(BUCKET)
             .remove(["kendaraan/" + oldFileName]);
         }
-        console.log(item.foto_url.split("/").pop());
 
         const fileExt = fotoFile.name.split(".").pop();
         const fileName = `kendaraan/${item.id}_${Date.now()}.${fileExt}`;

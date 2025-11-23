@@ -58,14 +58,14 @@ export default function KendaraanTable({ kendaraan, loading, onRefresh }) {
       setDeletingId(kendaraanId);
 
       if (fotoPath) {
-      const relativePath = fotoPath.split("/rental/")[1];
+        const relativePath = fotoPath.split("/rental/")[1];
 
-      const { error: removeError } = await supabase.storage
-        .from("rental")
-        .remove([relativePath]);
+        const { error: removeError } = await supabase.storage
+          .from("rental")
+          .remove([relativePath]);
 
-      if (removeError) throw removeError;
-    }
+        if (removeError) throw removeError;
+      }
       const { error: productError } = await supabase
         .from("kendaraan")
         .delete()
