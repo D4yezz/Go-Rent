@@ -62,20 +62,20 @@ export default function Footer() {
 
           <div>
             <h3 className="text-xl font-bold mb-4 text-white">Hubungi Kami</h3>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-3">
-                <Phone className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
-                <span className="text-sky-400 text-sm">(62) 812-3xxx-7xxx</span>
+            <ul className="space-y-3 text-sky-200">
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 shrink-0 mt-0.5" />
+                <span className="text-sm">(62) 812-3xxx-7xxx</span>
               </li>
-              <li className="flex items-start gap-3">
-                <Mail className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
-                <span className="text-sky-400 text-sm break-all">
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 shrink-0 mt-0.5" />
+                <span className="text-sm break-all">
                   info@gorent.com
                 </span>
               </li>
-              <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
-                <span className="text-sky-400 text-sm">
+              <li className="flex items-center gap-3">
+                <MapPin className="w-5 h-5 shrink-0 mt-0.5" />
+                <span className="text-sm">
                   Jl. Ujian Unit Kompetensi No. XII B, Malang
                 </span>
               </li>

@@ -3,24 +3,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCarRear } from "@fortawesome/free-solid-svg-icons";
 import { LogIn } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { title } from "process";
 import Link from "next/link";
-
-const navigasi = [
-  {
-    title: "Beranda",
-    href: "#",
-  },
-  {
-    title: "Mobil",
-    href: "#",
-  },
-  {
-    title: "Kontak",
-    href: "#",
-  },
-];
+import navigasi from "./navigasi";
 
 export default function Navbar() {
   return (

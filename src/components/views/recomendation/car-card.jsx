@@ -3,16 +3,17 @@ import {
   faCarSide,
   faCircleCheck,
   faCircleXmark,
+  faPalette,
   faUsb,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Cog, RefreshCcw, Usb } from "lucide-react";
+import { Cog, Palette, RefreshCcw, Usb } from "lucide-react";
 import Image from "next/image";
 
 export default function CarCard({
-  // id,
   merk,
   jenis,
+  warna,
   harga_per_hari,
   status,
   transmisi,
@@ -21,6 +22,12 @@ export default function CarCard({
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
       <div className="relative h-78 bg-gray-200">
+        <div className="text-[1rem] font-semibold w-28 flex items-center justify-center gap-2 py-1 text-sky-600 absolute bg-sky-50 rounded-md top-4 left-4">
+          <span>
+            <FontAwesomeIcon icon={faCarSide} />
+          </span>
+          <span>{jenis}</span>
+        </div>
         <Image
           src={image || "/car-icon.png"}
           alt={merk}
@@ -33,11 +40,11 @@ export default function CarCard({
         <h3 className="text-2xl font-semibold text-gray-900">{merk}</h3>
 
         <div className="mt-3 flex items-center justify-between">
-          <div className="text-[1rem] w-28 flex items-center gap-2 text-sky-600">
+          <div className="text-[1.1rem] w-28 flex items-center gap-2 text-sky-900">
             <span>
-              <FontAwesomeIcon icon={faCarSide} />
+              <FontAwesomeIcon icon={faPalette} />
             </span>
-            <span>{jenis}</span>
+            <span>{warna}</span>
           </div>
           <Badge
             variant={"outline"}

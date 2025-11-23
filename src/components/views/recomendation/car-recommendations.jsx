@@ -52,6 +52,7 @@ export default function CarRecommendations() {
               key={car.id}
               merk={car.merk}
               jenis={car.jenis}
+              warna={car.warna}
               harga_per_hari={car.harga_per_hari}
               status={car.status}
               transmisi={car.transmisi}
