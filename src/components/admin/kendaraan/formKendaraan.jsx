@@ -56,54 +56,70 @@ export default function FormKendaraan({ onSuccess }) {
     setIsLoading(true);
 
     try {
+      const { data: inserted, error: insertError } = await supabase
+        .from(TABLE)
+        .insert([
+          {
+            merk: merek,
+            deskripsi,
+            jenis,
+            transmisi,
+            warna,
+            harga_per_hari: Number(hargaPerHari) || 0,
+            status,
+            foto_url: null,
+          },
+        ])
+        .select()
+        .single();
+
+      if (insertError) throw insertError;
+
+      const kendaraanId = inserted.id;
+
       let fotoUrl = null;
 
       if (fotoFile) {
         const fileExt = fotoFile.name.split(".").pop();
-        const fileName = `${Date.now()}.${fileExt}`;
-        const filePath = `kendaraan/foto_${fileName}`;
+        const fileName = `${kendaraanId}_${Date.now()}.${fileExt}`; 
+        const filePath = `kendaraan/${fileName}`;
 
-        const { data: uploadData, error: uploadError } = await supabase.storage
+        const { error: uploadError } = await supabase.storage
           .from(BUCKET)
-          .upload(filePath, fotoFile, { cacheControl: "3600", upsert: false });
+          .upload(filePath, fotoFile, {
+            cacheControl: "3600",
+            upsert: true,
+          });
 
-        if (uploadError) {
-          throw uploadError;
-        }
+        if (uploadError) throw uploadError;
 
         const { data: publicData } = supabase.storage
           .from(BUCKET)
           .getPublicUrl(filePath);
+
         fotoUrl = publicData?.publicUrl || null;
+
+        await supabase
+          .from(TABLE)
+          .update({ foto_url: fotoUrl })
+          .eq("id", kendaraanId);
       }
 
-      const payload = {
-        foto_url: fotoUrl,
-        merk: merek,
-        deskripsi,
-        jenis,
-        transmisi,
-        warna,
-        harga_per_hari: Number(hargaPerHari) || 0,
-        status,
-      };
-
-      const { data, error } = await supabase.from(TABLE).insert([payload]);
-      if (error) throw error;
+      toast.success("Kendaraan berhasil ditambahkan");
 
       setOpen(false);
-      toast.success("Kendaraan berhasil ditambahkan");
+
       setMerek("");
       setDeskripsi("");
       setJenis("");
       setTransmisi("Manual");
       setWarna("");
-      setHargaPerHari(0);
+      setHargaPerHari("");
       setStatus("Tersedia");
       setFotoFile(null);
       setPreview(null);
 
-      if (typeof onSuccess === "function") onSuccess(data);
+      if (typeof onSuccess === "function") onSuccess();
     } catch (err) {
       console.error("Error adding kendaraan:", err);
       toast.error(
@@ -283,7 +299,7 @@ export default function FormKendaraan({ onSuccess }) {
             <Button
               type="submit"
               className="bg-sky-600 text-white rounded"
-              disabled={isLoading}
+              disabled={isLoading || !fotoFile}
             >
               {isLoading ? "Menyimpan..." : "Simpan"}
             </Button>

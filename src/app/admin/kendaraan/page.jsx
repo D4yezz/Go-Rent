@@ -68,7 +68,11 @@ export default function KendaraanPage() {
         action={<FormKendaraan onSuccess={getKendaraan} />}
       />
       <div className="flex flex-col px-8 mt-8 mb-20 gap-4">
-        <KendaraanTable kendaraan={kendaraan} loading={loading} />
+        <KendaraanTable
+          kendaraan={kendaraan}
+          loading={loading}
+          onRefresh={getKendaraan}
+        />
       </div>
     </>
   );
