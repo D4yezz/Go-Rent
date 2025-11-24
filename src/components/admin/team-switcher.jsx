@@ -38,7 +38,7 @@ export function TeamSwitcher({ teams }) {
               <div className="p-2 bg-cyan-sky text-sky-50 text-xl group-data-[collapsible=icon]:p-1 group-data-[collapsible=icon]:text-lg rounded-md">
                 <FontAwesomeIcon icon={faCarRear} />
               </div>
-              <h3 className="font-semibold">Admin</h3>
+              <h3 className="font-semibold">GO - Rent</h3>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>

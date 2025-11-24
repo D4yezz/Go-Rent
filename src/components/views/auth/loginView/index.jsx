@@ -11,6 +11,7 @@ import { faCarRear } from "@fortawesome/free-solid-svg-icons";
 import { useRouter, useSearchParams } from "next/navigation";
 import { getProfileUser, login } from "@/service/auth.service";
 import { toast } from "sonner";
+import Link from "next/link";
 
 export default function FormLogin() {
   const router = useRouter();
@@ -64,9 +65,7 @@ export default function FormLogin() {
       >
         <div className="mb-4 text-center flex flex-col justify-center items-center gap-2">
           <div className="rounded-full p-2 bg-cyan-sky w-fit h-fit text-white text-3xl">
-            <FontAwesomeIcon
-              icon={faCarRear}
-            />
+            <FontAwesomeIcon icon={faCarRear} />
           </div>
           <h1 className="text-3xl font-bold text-slate-900">Masuk</h1>
           <p className="text-slate-600 text-sm">
@@ -96,7 +95,6 @@ export default function FormLogin() {
           </InputGroup>
         </div>
 
-        {/* Password Input */}
         <div className="mb-6">
           <label
             htmlFor="password"
@@ -134,17 +132,6 @@ export default function FormLogin() {
           </InputGroup>
         </div>
 
-        {/* Remember Me & Forgot Password */}
-        <div className="flex items-center justify-end mb-8">
-          <a
-            href="#"
-            className="text-sm text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            Lupa kata sandi?
-          </a>
-        </div>
-
-        {/* Submit Button */}
         <Button
           type="submit"
           disabled={isLoading}
@@ -153,7 +140,6 @@ export default function FormLogin() {
           {isLoading ? "Sedang masuk..." : "Masuk"}
         </Button>
 
-        {/* Divider */}
         <div className="relative mb-6">
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-slate-200"></div>
@@ -163,15 +149,14 @@ export default function FormLogin() {
           </div>
         </div>
 
-        {/* Sign Up Link */}
         <p className="text-center text-sm text-slate-600">
           Belum punya akun?{" "}
-          <a
-            href="#"
+          <Link
+            href="/auth/register"
             className="text-blue-600 hover:text-blue-700 font-medium transition-colors"
           >
             Daftar di sini
-          </a>
+          </Link>
         </p>
       </form>
     </div>

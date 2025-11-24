@@ -6,9 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import CarCard from "../recomendation/car-card";
+import { AnimatePresence } from "framer-motion";
+import FormCar from "./formCar";
 
 export default function AllCars() {
   const [mobil, setMobil] = useState([]);
+  const [showForm, setShowForm] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getMobil = async () => {
@@ -51,9 +54,15 @@ export default function AllCars() {
             status={mobil.status}
             transmisi={mobil.transmisi}
             image={mobil.foto_url}
+            home={false}
+            showForm={showForm}
+            setShowForm={setShowForm}
           />
         ))}
       </div>
+      <AnimatePresence>
+        {showForm ? <FormCar setShowForm={setShowForm} /> : null}
+      </AnimatePresence>
     </section>
   );
 }

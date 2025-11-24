@@ -24,8 +24,8 @@ export const AdminMenu = {
       icon: <FontAwesomeIcon icon={faCarRear} />,
     },
     {
-      title: "Pemesanan",
-      url: "/admin/pemesanan",
+      title: "Penyewaan",
+      url: "/admin/penyewaan",
       icon: <KeySquare />,
     },
     {

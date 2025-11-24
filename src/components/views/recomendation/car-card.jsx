@@ -1,4 +1,7 @@
+"use client";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { getProfileUser } from "@/service/auth.service";
 import {
   faCarSide,
   faCircleCheck,
@@ -9,6 +12,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Cog, Palette, RefreshCcw, Usb } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 export default function CarCard({
   merk,
@@ -18,7 +24,52 @@ export default function CarCard({
   status,
   transmisi,
   image,
+  home = true,
+  showForm,
+  setShowForm,
 }) {
+  const [isLoading, SetIsLoading] = useState(true);
+  const [isLogin, setIsLogin] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+  const router = useRouter();
+  const checkUserLogin = async () => {
+    try {
+      const user = await getProfileUser();
+
+      if (user.status && user.data) {
+        setIsLogin(true);
+        setUserRole(user.data.profile.role);
+      } else {
+        setIsLogin(false);
+        setUserRole(null);
+      }
+    } catch (error) {
+      console.error("Error checking user login:", error);
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      await checkUserLogin();
+      SetIsLoading(false);
+    };
+
+    getUser();
+  }, []);
+
+  const handleButton = () => {
+    if (isLogin) {
+      if (userRole === "petugas" || userRole === "user") {
+        setShowForm(true);
+      } else {
+        toast.warning("Anda adalah admin");
+        router.push("/admin/dashboard");
+      }
+    } else {
+      router.push("/auth/login");
+    }
+  };
+
   return (
     <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow overflow-hidden">
       <div className="relative h-78 bg-gray-200">
@@ -82,9 +133,15 @@ export default function CarCard({
               Rp {harga_per_hari.toLocaleString("id-ID")}
             </span>
           </div>
-          <button className="bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-700 transition cursor-pointer">
-            Pesan Sekarang
-          </button>
+          <Button
+
+            disabled={status === "Tidak tersedia"}
+
+            onClick={() => (home ? router.push("/cars") : handleButton())}
+            className="bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-700 transition cursor-pointer"
+          >
+            Sewa Sekarang
+          </Button>
         </div>
       </div>
     </div>

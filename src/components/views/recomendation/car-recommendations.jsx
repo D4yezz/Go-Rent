@@ -38,7 +38,7 @@ export default function CarRecommendations() {
             perjalanan Anda
           </p>
         </div>
-        <Link href="/mobil" className="flex items-center gap-2 text-sky-600 text-lg"><CircleArrowRight size={20} /> Semua Kendaraan</Link>
+        <Link href="/cars" className="flex items-center gap-2 text-sky-600 text-lg"><CircleArrowRight size={20} /> Semua Kendaraan</Link>
       </div>
 
       {loading ? (

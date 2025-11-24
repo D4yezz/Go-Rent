@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function OurService() {
   return (
-    <section className="w-full mx-auto px-12 py-12 font-onest">
+    <section id="service" className="w-full mx-auto px-12 py-12 font-onest">
       <h1 className="text-5xl py-2 font-bold bg-cyan-sky bg-clip-text text-transparent w-full text-center my-12 font-geist-sans">
         Layanan Kami
       </h1>

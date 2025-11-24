@@ -21,11 +21,11 @@ const menu = [
   },
   {
     title: "Sewa Mobil",
-    href: "/mobil",
+    href: "/cars",
   },
   {
     title: "Kontak",
-    href: "/",
+    href: "#",
   },
 ];
 
