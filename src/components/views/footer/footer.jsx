@@ -17,7 +17,7 @@ const menu = [
   },
   {
     title: "Layanan Kami",
-    href: "#service",
+    href: "/#service",
   },
   {
     title: "Sewa Mobil",

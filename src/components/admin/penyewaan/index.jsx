@@ -36,11 +36,14 @@ import {
 import { toast } from "sonner";
 import supabase from "@/lib/supabase/client";
 import DetailPenyewaan from "./dialog/detailPenyewaan";
+import EditPenyewaan from "./dialog/editPenyewaan";
 
 export default function PenyewaanTable({ penyewaan, loading, onRefresh }) {
   const [deletingId, setDeletingId] = useState(null);
   const [openDialogId, setOpenDialogId] = useState(null);
   const [selectedPenyewaan, setSelectedPenyewaan] = useState(null);
+  const [editOpen, setEditOpen] = useState(false);
+  const [editItem, setEditItem] = useState(null);
 
   if (loading) {
     return <Skeleton className={"w-full h-[250px]"} />;
@@ -76,6 +79,12 @@ export default function PenyewaanTable({ penyewaan, loading, onRefresh }) {
     } finally {
       setDeletingId(null);
     }
+  };
+
+  const handleEditSuccess = () => {
+    setEditOpen(false);
+    setEditItem(null);
+    if (typeof onRefresh === "function") onRefresh();
   };
 
   return (
@@ -135,14 +144,23 @@ export default function PenyewaanTable({ penyewaan, loading, onRefresh }) {
                       <DetailPenyewaan item={item} />
                     </DialogContent>
                   </Dialog>
-                  <Button
-                    size="sm"
-                    className="bg-sky-800 hover:bg-sky-700 text-sky-100 px-3 py-2 h-auto cursor-pointer"
-                    title="Edit"
-                    // onClick={() => setOpenEdit(item)}
-                  >
-                    <SquarePen className="w-4 h-4" />
-                  </Button>
+                  <Dialog>
+                    <DialogTrigger
+                      onClick={() => setEditItem(item)}
+                      className="bg-sky-800 hover:bg-sky-700 text-sky-100 px-3 py-2 h-auto cursor-pointer rounded-md"
+                    >
+                      <SquarePen className="w-4 h-4" />
+                    </DialogTrigger>
+                    <DialogContent className="max-h-screen overflow-y-auto">
+                      {editItem && (
+                        <EditPenyewaan
+                          item={editItem}
+                          onClose={() => setEditOpen(false)}
+                          onSuccess={handleEditSuccess}
+                        />
+                      )}
+                    </DialogContent>
+                  </Dialog>
                   <AlertDialog
                     open={openDialogId === item.id}
                     onOpenChange={(open) => {
