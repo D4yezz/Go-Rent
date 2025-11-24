@@ -109,7 +109,7 @@ export default function PenyewaanTable({ penyewaan, loading, onRefresh }) {
                 {index + 1}
               </TableCell>
               <TableCell>{item.user_id.username}</TableCell>
-              <TableCell>{item.kendaraan_id.merek}</TableCell>
+              <TableCell>{item.kendaraan_id.merk}</TableCell>
               <TableCell>
                 {new Intl.DateTimeFormat("id-ID", {
                   year: "numeric",

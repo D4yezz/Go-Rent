@@ -81,7 +81,7 @@ export default function FormKendaraan({ onSuccess }) {
 
       if (fotoFile) {
         const fileExt = fotoFile.name.split(".").pop();
-        const fileName = `${kendaraanId}_${Date.now()}.${fileExt}`; 
+        const fileName = `${kendaraanId}_${Date.now()}.${fileExt}`;
         const filePath = `kendaraan/${fileName}`;
 
         const { error: uploadError } = await supabase.storage
@@ -132,7 +132,7 @@ export default function FormKendaraan({ onSuccess }) {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="bg-cyan-sky rounded-full flex items-center gap-2 py-2 px-4 text-white cursor-pointer duration-200 ease-in-out">
+      <DialogTrigger className="bg-cyan-sky rounded-md flex items-center gap-2 py-2 px-4 text-white cursor-pointer duration-200 ease-in-out">
         <CirclePlus size={20} />
         Tambah Kendaraan
       </DialogTrigger>

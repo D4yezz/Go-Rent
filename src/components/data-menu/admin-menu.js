@@ -30,7 +30,7 @@ export const AdminMenu = {
     },
     {
       title: "Pengguna",
-      url: "/admin/users",
+      url: "/admin/customer",
       icon: <Users />,
     },
     {
