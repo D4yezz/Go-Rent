@@ -6,8 +6,6 @@ import { X } from "lucide-react";
 import supabase from "@/lib/supabase/client";
 import { getProfileUser } from "@/service/auth.service";
 import { toast } from "sonner";
-
-// SHADCN COMPONENTS
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import {
@@ -18,9 +16,14 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-export default function FormCar({ setShowForm, onSuccess }) {
+export default function FormCar({
+  showForm,
+  setShowForm,
+  idMobil,
+  onSuccess = () => {},
+}) {
   const [kendaraanList, setKendaraanList] = useState([]);
-  const [selectedKendaraan, setSelectedKendaraan] = useState(null);
+  const [selectedKendaraan, setSelectedKendaraan] = useState("");
   const [kendaraanDetails, setKendaraanDetails] = useState(null);
 
   const [tanggalMulai, setTanggalMulai] = useState("");
@@ -29,6 +32,18 @@ export default function FormCar({ setShowForm, onSuccess }) {
 
   const [isLoading, setIsLoading] = useState(false);
   const [userId, setUserId] = useState(null);
+
+  useEffect(() => {
+    if (showForm) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [showForm]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -53,11 +68,20 @@ export default function FormCar({ setShowForm, onSuccess }) {
 
     loadData();
   }, []);
+  useEffect(() => {
+    if (idMobil) {
+      setSelectedKendaraan(idMobil);
+    }
+  }, [idMobil]);
 
   useEffect(() => {
     if (selectedKendaraan) {
-      const found = kendaraanList.find((k) => k.id === selectedKendaraan);
-      setKendaraanDetails(found);
+      const found = kendaraanList.find(
+        (k) => k.id?.toString() === selectedKendaraan
+      );
+      setKendaraanDetails(found || null);
+    } else {
+      setKendaraanDetails(null);
     }
   }, [selectedKendaraan, kendaraanList]);
 
@@ -145,16 +169,16 @@ export default function FormCar({ setShowForm, onSuccess }) {
           <div className="space-y-2">
             <Label>Pilih Kendaraan</Label>
             <Select
-              onValueChange={(v) => setSelectedKendaraan(Number(v))}
-              value={selectedKendaraan?.toString() || ""}
+              onValueChange={(v) => setSelectedKendaraan(v)}
+              value={idMobil}
             >
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Pilih kendaraan..." />
               </SelectTrigger>
               <SelectContent>
-                {kendaraanList.map((item) => (
-                  <SelectItem key={item.id} value={item.id.toString()}>
-                    {item.merek} ({formatCurrency(item.harga_per_hari)}/hari)
+                {kendaraanList.map((item, index) => (
+                  <SelectItem key={index} value={item?.id}>
+                    {item?.merk} ({formatCurrency(item?.harga_per_hari)}/hari)
                   </SelectItem>
                 ))}
               </SelectContent>

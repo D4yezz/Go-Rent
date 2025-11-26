@@ -67,7 +67,7 @@ export default function Navbar() {
     } else if (userRole === "user") {
       return (
         <Link
-          href="/user/dashboard"
+          href="/pelanggan/dashboard"
           className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
         >
           <ShoppingBag size={20} />
@@ -130,13 +130,6 @@ export default function Navbar() {
         ) : (
           roleButton()
         )}
-        {/* <Link
-          href="/auth/login"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
-        >
-          <LogIn size={20} />
-          Login
-        </Link> */}
       </nav>
     </header>
   );

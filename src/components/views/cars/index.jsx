@@ -12,6 +12,7 @@ import FormCar from "./formCar";
 export default function AllCars() {
   const [mobil, setMobil] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [selectedMobilId, setSelectedMobilId] = useState(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     const getMobil = async () => {
@@ -44,16 +45,17 @@ export default function AllCars() {
         </p>
       </div>
       <div className="grid grid-cols-3 gap-4 py-4">
-        {mobil.map((mobil) => (
+        {mobil.map((item) => (
           <CarCard
-            key={mobil.id}
-            merk={mobil.merk}
-            jenis={mobil.jenis}
-            warna={mobil.warna}
-            harga_per_hari={mobil.harga_per_hari}
-            status={mobil.status}
-            transmisi={mobil.transmisi}
-            image={mobil.foto_url}
+            key={item.id}
+            mobilId={item.id} // Tambahkan ini
+            merk={item.merk}
+            jenis={item.jenis}
+            warna={item.warna}
+            harga_per_hari={item.harga_per_hari}
+            status={item.status}
+            transmisi={item.transmisi}
+            image={item.foto_url}
             home={false}
             showForm={showForm}
             setShowForm={setShowForm}
@@ -61,7 +63,13 @@ export default function AllCars() {
         ))}
       </div>
       <AnimatePresence>
-        {showForm ? <FormCar setShowForm={setShowForm} /> : null}
+        {showForm ? (
+          <FormCar
+            showForm={showForm}
+            setShowForm={setShowForm}
+            idMobil={showForm} 
+          />
+        ) : null}
       </AnimatePresence>
     </section>
   );

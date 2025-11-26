@@ -63,8 +63,7 @@ export function NavUser({ user, loading }) {
                   {loading ? (
                     <Loader2 className="animate-spin text-sky-600" />
                   ) : (
-                    user.name.split(" ")[0][0] + user.name.split(" ")[1][0] ||
-                    "GR"
+                    user.name.split(" ")[0][0] || "GR"
                   )}
                 </AvatarFallback>
               </Avatar>
@@ -89,8 +88,7 @@ export function NavUser({ user, loading }) {
                     {loading ? (
                       <Loader2 className="animate-spin text-sky-600" />
                     ) : (
-                      user.name.split(" ")[0][0] + user.name.split(" ")[1][0] ||
-                      "GR"
+                      user.name.split(" ")[0][0] || "GR"
                     )}
                   </AvatarFallback>
                 </Avatar>

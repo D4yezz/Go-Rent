@@ -14,6 +14,7 @@ import Image from "next/image";
 import { toast } from "sonner";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
   const BUCKET = "rental";
@@ -154,7 +155,7 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
                   id="foto"
                   className={"hidden"}
                   onChange={handleFileChange}
-                  required
+                  required={!item?.foto_url}
                 />
               </div>
             </div>
@@ -170,7 +171,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
             </div>
           </div>
 
-          {/* Deskripsi */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Deskripsi
@@ -183,7 +183,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Jenis */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
                 Jenis
@@ -196,7 +195,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
               />
             </div>
 
-            {/* Transmisi */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
                 Transmisi
@@ -213,7 +211,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Warna */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
                 Warna
@@ -226,7 +223,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
               />
             </div>
 
-            {/* Harga per hari */}
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-2">
                 Harga per hari (Rp)
@@ -241,7 +237,6 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
             </div>
           </div>
 
-          {/* Status */}
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-2">
               Status
@@ -256,22 +251,21 @@ export default function EditKendaraan({ item, open, onOpenChange, onSuccess }) {
             </select>
           </div>
 
-          {/* Action Buttons */}
           <div className="flex items-center justify-end gap-3 mt-6 pt-4 border-t">
-            <button
+            <Button
               type="button"
               onClick={() => onOpenChange(false)}
-              className="px-4 py-2 rounded border border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+              className="px-4 py-2 rounded border bg-white border-slate-300 text-slate-700 font-medium hover:bg-slate-50 transition-colors"
             >
               Batal
-            </button>
-            <button
+            </Button>
+            <Button
               type="submit"
               disabled={isLoading}
               className="px-4 py-2 bg-sky-600 text-white rounded font-medium hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? "Menyimpan..." : "Simpan Perubahan"}
-            </button>
+            </Button>
           </div>
         </form>
       </DialogContent>

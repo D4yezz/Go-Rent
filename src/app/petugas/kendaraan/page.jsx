@@ -16,35 +16,18 @@ import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import supabase from "@/lib/supabase/client";
 import { useCallback, useEffect, useState } from "react";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-export default function KendaraanPage() {
+export default function KendaraanPetugas() {
   const [kendaraan, setKendaraan] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-  const perPage = 5;
-  const [totalCount, setTotalCount] = useState(0);
-  const totalPages = Math.max(1, Math.ceil((totalCount || 0) / perPage));
 
   const getKendaraan = useCallback(async () => {
     setLoading(true);
     try {
-      const from = (page - 1) * perPage;
-      const to = page * perPage - 1;
-      const { data, error, count } = await supabase
-        .from("kendaraan")
-        .select("*", { count: "exact" })
-        .order("created_at", { ascending: false })
-        .range(from, to);
+      const { data, error } = await supabase.from("kendaraan").select("*");
       if (error) {
         toast.error(error?.message || null);
       } else {
         setKendaraan(data || []);
-        setTotalCount(
-          typeof count === "number"
-            ? count
-            : (data || []).length + (page - 1) * perPage
-        );
       }
     } catch (error) {
       toast.error(error?.message || null);
@@ -52,7 +35,7 @@ export default function KendaraanPage() {
     } finally {
       setLoading(false);
     }
-  }, [page]);
+  }, []);
   useEffect(() => {
     getKendaraan();
   }, [getKendaraan]);
@@ -69,7 +52,7 @@ export default function KendaraanPage() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/admin/dashboard">Admin</BreadcrumbLink>
+                <BreadcrumbLink href="/petugas/dashboard">Petugas</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
@@ -90,30 +73,6 @@ export default function KendaraanPage() {
           loading={loading}
           onRefresh={getKendaraan}
         />
-        <div className="flex items-center justify-between px-2 font-onest">
-          <div className="text-sm text-slate-600">
-            Menampilkan {kendaraan.length} kendaraan dari {totalCount}
-          </div>
-          <div className="flex items-center gap-2">
-            <Button
-              className={"bg-cyan-sky"}
-              onClick={() => setPage((p) => Math.max(1, p - 1))}
-              disabled={page <= 1}
-            >
-              <ArrowLeft size={16} />
-            </Button>
-            <div className="text-sm">
-              Halaman {page} / {totalPages}
-            </div>
-            <Button
-              className={"bg-cyan-sky"}
-              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
-              disabled={page >= totalPages}
-            >
-              <ArrowRight size={16} />
-            </Button>
-          </div>
-        </div>
       </div>
     </>
   );

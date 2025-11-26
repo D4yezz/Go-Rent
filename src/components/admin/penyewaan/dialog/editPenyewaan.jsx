@@ -17,6 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Pin } from "lucide-react";
 
 export default function EditPenyewaan({ item, onClose, onSuccess }) {
   const TABLE = "pemesanan";
@@ -112,7 +113,7 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
 
   return (
     <>
-      <DialogHeader>
+      <DialogHeader className={"font-rethink"}>
         <DialogTitle className="text-2xl">Edit Pesanan Penyewaan</DialogTitle>
         <DialogDescription>
           Ubah tanggal, status, dan harga pesanan sewa dari{" "}
@@ -122,7 +123,7 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
 
       <form
         onSubmit={handleSubmit}
-        className="space-y-6 mt-4 max-h-96 overflow-y-auto"
+        className="space-y-6 mt-4 max-h-96 overflow-y-auto font-rethink"
       >
         <div className="grid grid-cols-2 gap-4 bg-slate-50 rounded-lg p-4">
           <div>
@@ -171,18 +172,16 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
           <Label className="block text-sm font-medium text-slate-700 mb-2">
             Status Pesanan <span className="text-red-500">*</span>
           </Label>
-          <Select
-            onValueChange={setStatus}
-            value={status}
-          >
+          <Select onValueChange={setStatus} value={status}>
             <SelectTrigger className="w-full">
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="menunggu">Menunggu</SelectItem>
+                <SelectItem value="disewa">Disewa</SelectItem>
                 <SelectItem value="selesai">Selesai</SelectItem>
-                <SelectItem value="batal">Batal</SelectItem>
+                <SelectItem value="dibatalkan">Dibatalkan</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
@@ -210,7 +209,9 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
         )}
 
         <div className="text-xs text-slate-500 bg-slate-50 rounded p-3 space-y-1">
-          <p className="font-medium">📌 Catatan:</p>
+          <p className="font-medium flex items-center gap-1">
+            <Pin size={14} className="rotate-18" /> Catatan:
+          </p>
           <ul className="list-disc list-inside space-y-1">
             <li>
               Total harga akan otomatis dihitung berdasarkan tanggal dan durasi

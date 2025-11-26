@@ -15,8 +15,10 @@ import AdminMenu from "../data-menu/admin-menu";
 import { useEffect, useState } from "react";
 import { getProfileUser } from "@/service/auth.service";
 import navigasi from "../layout/navbar/navigasi";
+import PetugasMenu from "../data-menu/petugas-menu";
+import PelangganMenu from "../data-menu/pelanggan-menu";
 
-export function AppSidebar({ ...props }) {
+export function AppSidebar({ role = "admin", ...props }) {
   const [userData, setUserData] = useState({
     userId: "",
     name: "",
@@ -34,7 +36,7 @@ export function AppSidebar({ ...props }) {
           userId: res.data.profile.id,
           name: res.data.profile.username,
           email: res.data.auth.email,
-          avatar: res.data.profile.picture,
+          avatar: res.data.profile.foto_url,
           role: res.data.profile.role,
         });
       }
@@ -43,13 +45,24 @@ export function AppSidebar({ ...props }) {
 
     getUserData();
   }, []);
+
+  const menu = () => {
+    if (role === "admin") {
+      return AdminMenu.navMain;
+    } else if (role === "petugas") {
+      return PetugasMenu.navMain;
+    } else if (role === "pelanggan") {
+      return PelangganMenu.navMain;
+    }
+  };
+
   return (
     <Sidebar collapsible="icon" {...props} className={"font-schibsted-grotesk"}>
       <SidebarHeader>
         <TeamSwitcher teams={navigasi} />
       </SidebarHeader>
       <SidebarContent className={"bg-cyan-sky text-white"}>
-        <NavMain items={AdminMenu.navMain} />
+        <NavMain items={menu()} />
         {/* <NavProjects projects={AdminMenu.projects} /> */}
       </SidebarContent>
       <SidebarFooter>

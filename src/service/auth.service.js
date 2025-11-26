@@ -1,4 +1,3 @@
-
 import { api } from "@/config/api";
 import axios from "axios";
 // import { supabaseService } from "@/lib/supabase/admin";
@@ -21,21 +20,32 @@ export const login = async (payload) => {
   }
 };
 
-export const register = async (payload) => {
+// export const register = async (payload) => {
+//   try {
+//     const response = await api.post("/register", payload);
+//     return response.data;
+//   } catch (error) {
+//     console.error("Register service error:", error);
+
+//     if (axios.isAxiosError(error) && error.response) {
+//       return error.response.data;
+//     }
+
+//     return {
+//       status: false,
+//       pesan: "Network error",
+//     };
+//   }
+// };
+export const registerUser = async (payload) => {
   try {
     const response = await api.post("/register", payload);
     return response.data;
   } catch (error) {
-    console.error("Register service error:", error);
-
     if (axios.isAxiosError(error) && error.response) {
       return error.response.data;
     }
-
-    return {
-      status: false,
-      pesan: "Network error",
-    };
+    return { status: false, pesan: "Network error" };
   }
 };
 
@@ -63,7 +73,6 @@ export const getProfileUser = async () => {
   }
 };
 
-
 export const logout = async () => {
   try {
     const response = await api.post("/logout");
@@ -79,39 +88,19 @@ export const logout = async () => {
   }
 };
 
-// export const ForgotPassword = async (email) => {
-//   const { data } = await supabaseService.listUsers();
-//   const userEmail = email;
-
-//   const user = data.users.find((u) => u.email === userEmail);
-
-//   if (!user) {
-//     return {
-//       status: false,
-//       pesan: "Tidak Dapat Menemukan Email",
-//     };
-//   }
-//   try {
-//     const response = await api.post("/forgot-password", user);
-//     return response.data;
-//   } catch (error) {
-//     if (axios.isAxiosError(error) && error.response) {
-//       return error.response.data;
-//     }
-//   }
-// };
-
-// export const UpdatePassword = async (password) => {
-//   try {
-//     const response = await api.post("/update-password", password);
-//     return response.data;
-//   } catch (error) {
-//     if (axios.isAxiosError(error) && error.response) {
-//       return error.response.data;
-//     }
-//     return {
-//       status: false,
-//       pesan: "Network error",
-//     };
-//   }
-// };
+export const UpdatePassword = async (password) => {
+  try {
+    const response = await api.post("/update-password", {
+      password: password,
+    });
+    return response.data;
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.data;
+    }
+    return {
+      status: false,
+      pesan: "Network error",
+    };
+  }
+};

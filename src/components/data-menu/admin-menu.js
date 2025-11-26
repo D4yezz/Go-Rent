@@ -5,7 +5,6 @@ import {
   Frame,
   KeySquare,
   LayoutPanelLeft,
-  LogOut,
   Map,
   PieChart,
   Users,
@@ -35,7 +34,7 @@ export const AdminMenu = {
     },
     {
       title: "Laporan",
-      url: "/admin/reports",
+      url: "/admin/laporan",
       icon: <FileChartColumn />,
     },
   ],

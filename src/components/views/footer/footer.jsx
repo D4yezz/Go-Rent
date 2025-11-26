@@ -33,7 +33,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-sky-800 text-sky-100 mt-20 font-rethink">
+    <footer id="kontak" className="bg-sky-800 text-sky-100 mt-20 font-rethink">
       <div className="container mx-auto px-4 py-16">
         <div className="flex items-start justify-between gap-8 mb-12">
           <div className="pr-4 h-full w-[30%]">

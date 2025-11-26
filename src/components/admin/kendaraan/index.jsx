@@ -127,7 +127,12 @@ export default function KendaraanTable({ kendaraan, loading, onRefresh }) {
               <TableCell>{item.jenis}</TableCell>
               <TableCell>{item.transmisi}</TableCell>
               <TableCell>{item.warna}</TableCell>
-              <TableCell>{item.harga_per_hari}</TableCell>
+              <TableCell>
+                Rp.{" "}
+                {new Intl.NumberFormat("id-ID").format(
+                  item.harga_per_hari || 0
+                )}
+              </TableCell>
               <TableCell>
                 <Badge
                   className={

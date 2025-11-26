@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 export default function CarCard({
+  mobilId,
   merk,
   jenis,
   warna,
@@ -60,10 +61,11 @@ export default function CarCard({
   const handleButton = () => {
     if (isLogin) {
       if (userRole === "petugas" || userRole === "user") {
-        setShowForm(true);
+        // setSelectedMobilId(mobilId);
+        setShowForm(mobilId);
       } else {
         toast.warning("Anda adalah admin");
-        router.push("/admin/dashboard");
+        router.push("/admin/penyewaan");
       }
     } else {
       router.push("/auth/login");
@@ -134,9 +136,7 @@ export default function CarCard({
             </span>
           </div>
           <Button
-
             disabled={status === "Tidak tersedia"}
-
             onClick={() => (home ? router.push("/cars") : handleButton())}
             className="bg-sky-600 text-white px-4 py-2 rounded-md hover:bg-sky-700 transition cursor-pointer"
           >

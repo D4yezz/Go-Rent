@@ -1,5 +1,6 @@
-import DashboardView from "@/components/admin/dashboard";
+"use client";
 import HeaderAdmin from "@/components/layout/headerAdmin";
+import SettingsAcc from "@/components/pelanggan/settings";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -11,7 +12,7 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
-export default function DashboardPetugas() {
+export default function SettingsPelanggan() {
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12 font-instrument-sans">
@@ -24,24 +25,24 @@ export default function DashboardPetugas() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/petugas/dashboard">
-                  Petugas
+                <BreadcrumbLink href="/pelanggan/dashboard">
+                  Pelanggan
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Dashboard</BreadcrumbPage>
+                <BreadcrumbPage>Pengaturan Akun</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </header>
       <HeaderAdmin
-        title={"Dashboard"}
-        desc={"Pantau website Go Rent dengan praktis"}
+        title={"Pengaturan Akun"}
+        desc={"Edit akun sesuai preferensi anda"}
       />
       <div className="flex flex-col px-8 mt-8 mb-20 gap-4">
-        <DashboardView role="petugas" />
+        <SettingsAcc />
       </div>
     </>
   );

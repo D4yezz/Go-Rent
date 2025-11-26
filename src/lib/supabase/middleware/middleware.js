@@ -39,7 +39,7 @@ export async function updateSession(request) {
     if (
       pathname.startsWith("/admin") ||
       pathname.startsWith("/petugas") ||
-      pathname.startsWith("/user")
+      pathname.startsWith("/pelanggan")
     ) {
       const url = request.nextUrl.clone();
       url.pathname = "/auth/login";
@@ -74,6 +74,15 @@ export async function updateSession(request) {
       url.searchParams.set("callbackUrl", pathname);
       return NextResponse.redirect(url);
     }
+    if (pathname === "/petugas") redirectUrl = "/petugas/dashboard";
+  } else if (pathname.startsWith("/pelanggan")) {
+    if (role !== "user") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/auth/login";
+      url.searchParams.set("callbackUrl", pathname);
+      return NextResponse.redirect(url);
+    }
+    if (pathname === "/pelanggan") redirectUrl = "/pelanggan/dashboard";
   } else if (pathname.startsWith("/profile")) {
     if (role !== "admin" && role !== "petugas") {
       const url = request.nextUrl.clone();

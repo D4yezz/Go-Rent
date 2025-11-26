@@ -41,17 +41,19 @@ export default function DetailPenyewaan({ item }) {
     const styles = {
       selesai: "bg-green-100 text-green-800 border border-green-300",
       menunggu: "bg-yellow-100 text-yellow-800 border border-yellow-300",
-      batal: "bg-red-100 text-red-800 border border-red-300",
+      disewa: "bg-sky-100 text-sky-800 border border-sky-300",
+      dibatalkan: "bg-red-100 text-red-800 border border-red-300",
     };
 
     const labels = {
       selesai: "Selesai",
       menunggu: "Menunggu",
-      batal: "Dibatalkan",
+      disewa: "Disewa",
+      dibatalkan: "Dibatalkan",
     };
 
     return {
-      style: styles[status] || styles.pending,
+      style: styles[status] || styles.menunggu,
       label: labels[status] || status,
     };
   };
@@ -64,7 +66,6 @@ export default function DetailPenyewaan({ item }) {
 
   const statusInfo = getStatusBadge(item.status);
   const days = calculateDays();
-  console.log(item);
 
   return (
     <>

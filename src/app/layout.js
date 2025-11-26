@@ -55,7 +55,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning={false}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rethinkSans.variable} ${schibstedGrotesk.variable} ${beVietnamPro.variable} ${onest.variable} ${instrument.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${rethinkSans.variable} ${schibstedGrotesk.variable} ${beVietnamPro.variable} ${onest.variable} ${instrument.variable} antialiased scroll-smooth`}
       >
         {children}
         <Toaster position="top-right" richColors expand={false} />

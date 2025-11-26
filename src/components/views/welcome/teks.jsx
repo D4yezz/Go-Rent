@@ -4,6 +4,7 @@ import { faCarRear } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Phone } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function TeksWelcome() {
   return (
@@ -18,18 +19,18 @@ export default function TeksWelcome() {
         </p>
       </div>
       <div className="flex items-center gap-4 mt-12">
-        <button className="flex items-center gap-2 bg-cyan-sky p-2 rounded-full cursor-pointer hover:shadow-lg hover:scale-105 duration-300 ease-in-out">
+        <Link href={"/cars"} className="flex items-center gap-2 bg-cyan-sky p-2 rounded-full cursor-pointer hover:shadow-lg hover:scale-105 duration-300 ease-in-out">
           <span className="rounded-full px-2.5 py-2 text-lg bg-white text-sky-600">
             <FontAwesomeIcon icon={faCarRear} />
           </span>
           <p className="font-semibold text-white pr-2">Sewa Sekarang</p>
-        </button>
-        <button className="flex items-center gap-2 bg-white ring ring-sky-600 p-2 rounded-full cursor-pointer hover:shadow-lg hover:scale-105 duration-300 ease-in-out">
+        </Link>
+        <Link href={"/#kontak"} className="flex items-center gap-2 bg-white ring ring-sky-600 p-2 rounded-full cursor-pointer hover:shadow-lg hover:scale-105 duration-300 ease-in-out">
           <p className="font-semibold text-sky-600 pl-2">Hubungi</p>
           <span className="rounded-full p-2 bg-cyan-sky text-white">
             <Phone size={20} />
           </span>
-        </button>
+        </Link>
       </div>
       <div className="w-full h-fit flex items-center justify-center z-10">
         <Image

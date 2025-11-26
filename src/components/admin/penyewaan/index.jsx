@@ -52,9 +52,11 @@ export default function PenyewaanTable({ penyewaan, loading, onRefresh }) {
   const badgeStyle = (penyewaan) => {
     switch (penyewaan.status) {
       case "selesai":
-        return "bg-sky-500";
+        return "bg-green-500";
       case "menunggu":
         return "bg-yellow-300 text-black";
+      case "disewa":
+        return "bg-sky-600";
       default:
         return "bg-red-600";
     }
