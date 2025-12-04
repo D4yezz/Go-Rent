@@ -5,19 +5,27 @@ import { faCarRear } from "@fortawesome/free-solid-svg-icons";
 import {
   LayoutPanelLeft,
   LogIn,
+  Menu,
   ShoppingBag,
   SlidersHorizontal,
+  X,
 } from "lucide-react";
 import Link from "next/link";
 import navigasi from "./navigasi";
 import { getProfileUser } from "@/service/auth.service";
 import { useEffect, useState } from "react";
 import { Skeleton } from "@/components/ui/skeleton";
+import useMediaQuery from "@/hooks/useMediaQuery";
+import { Button } from "@/components/ui/button";
+import { AnimatePresence, motion } from "framer-motion";
+import MobileSidebar from "./mobileSidebar";
 
 export default function Navbar() {
   const [isLogin, setIsLogin] = useState(false);
   const [userRole, setUserRole] = useState(null);
   const [IsLoading, SetIsLoading] = useState(true);
+  const [showBar, setShowBar] = useState(false);
+  const isDekstop = useMediaQuery("(min-width: 1024px)");
   const checkUserLogin = async () => {
     try {
       const user = await getProfileUser();
@@ -48,7 +56,7 @@ export default function Navbar() {
       return (
         <Link
           href="/admin/dashboard"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-full h-full rounded-md cursor-pointer flex items-center justify-center gap-2"
         >
           <LayoutPanelLeft size={20} />
           Dashboard
@@ -58,7 +66,7 @@ export default function Navbar() {
       return (
         <Link
           href="/petugas/dashboard"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-full h-full rounded-md cursor-pointer flex items-center justify-center gap-2"
         >
           <SlidersHorizontal size={20} />
           Dashboard
@@ -68,7 +76,7 @@ export default function Navbar() {
       return (
         <Link
           href="/pelanggan/dashboard"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-full h-full rounded-md cursor-pointer flex items-center justify-center gap-2"
         >
           <ShoppingBag size={20} />
           Dashboard
@@ -78,7 +86,7 @@ export default function Navbar() {
       return (
         <Link
           href="/auth/login"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-full h-full rounded-md cursor-pointer flex items-center justify-center gap-2"
         >
           <LogIn size={20} />
           Masuk
@@ -88,7 +96,7 @@ export default function Navbar() {
       return (
         <Link
           href="/auth/login"
-          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-fit h-full rounded-md cursor-pointer flex items-center gap-2"
+          className="bg-white text-blue-500 hover:bg-blue-100 font-semibold px-4 py-2 w-full h-full rounded-md cursor-pointer flex items-center justify-center gap-2"
         >
           <LogIn size={20} />
           Masuk
@@ -113,23 +121,41 @@ export default function Navbar() {
           <span className="text-xl font-semibold text-blue-50">Go - Rent</span>
         </Link>
 
-        <div className="flex items-center text-white gap-6">
-          {navigasi.map((item) => (
-            <Link
-              href={item.href}
-              key={item.title}
-              className="hover:bg-white hover:text-blue-500 px-4 py-1 rounded-lg duration-200 ease-in-out"
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-
-        {IsLoading ? (
-          <Skeleton className="w-32 h-10 rounded-md" />
+        {isDekstop ? (
+          <>
+            <div className="flex items-center text-white gap-6">
+              {navigasi.map((item) => (
+                <Link
+                  href={item.href}
+                  key={item.title}
+                  className="hover:bg-white hover:text-blue-500 px-4 py-1 rounded-lg duration-200 ease-in-out"
+                >
+                  {item.title}
+                </Link>
+              ))}
+            </div>
+            {IsLoading ? (
+              <Skeleton className="w-32 h-10 rounded-md cursor-progress" />
+            ) : (
+              <div className="w-fit h-full">{roleButton()}</div>
+            )}
+          </>
         ) : (
-          roleButton()
+          <>
+            <Button
+              onClick={() => setShowBar(!showBar)}
+              size={"icon"}
+              className={"bg-white text-sky-600 mr-1 cursor-pointer"}
+            >
+              <Menu size={32} />
+            </Button>
+          </>
         )}
+        <MobileSidebar
+          showBar={showBar}
+          setShowBar={setShowBar}
+          buttonRole={roleButton}
+        />
       </nav>
     </header>
   );

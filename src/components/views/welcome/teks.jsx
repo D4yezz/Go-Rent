@@ -8,17 +8,17 @@ import Link from "next/link";
 
 export default function TeksWelcome() {
   return (
-    <section className="w-full px-12 mt-16 flex flex-col items-center justify-center font-schibsted-grotesk relative">
+    <section className="w-full lg:px-12 px-6 lg:mt-16 mt-6 flex flex-col items-center justify-center font-schibsted-grotesk relative">
       <div className="flex flex-col items-center text-center gap-2 z-10">
-        <h1 className="text-7xl font-semibold w-5xl bg-cyan-sky bg-clip-text text-transparent py-2">
+        <h1 className="lg:text-7xl text-4xl lg:font-semibold font-bold lg:w-5xl bg-cyan-sky bg-clip-text text-transparent py-2">
           Selamat Datang Website Penyewaan Mobil Terpercaya
         </h1>
-        <p className="text-xl text-sky-900 font-medium text-balance w-2xl">
+        <p className="lg:text-xl text-lg text-sky-900 font-medium text-balance lg:w-2xl">
           Go-Rent adalah website penyewaan mobil terpercaya di Indonesia,
           memudahkan Anda untuk menyewa mobil dengan mudah dan cepat.
         </p>
       </div>
-      <div className="flex items-center gap-4 mt-12">
+      <div className="flex items-center gap-4 lg:mt-12 mt-6">
         <Link href={"/cars"} className="flex items-center gap-2 bg-cyan-sky p-2 rounded-full cursor-pointer hover:shadow-lg hover:scale-105 duration-300 ease-in-out">
           <span className="rounded-full px-2.5 py-2 text-lg bg-white text-sky-600">
             <FontAwesomeIcon icon={faCarRear} />
@@ -38,7 +38,7 @@ export default function TeksWelcome() {
           alt="welcome"
           width={1000}
           height={1000}
-          className="h-fit w-1/2"
+          className="h-fit lg:w-1/2"
         />
       </div>
       <LayerBlur />

@@ -84,7 +84,6 @@ export async function POST(req) {
     const { email, password, confirm_password, username, no_hp } =
       await req.json();
 
-    // Validation
     if (!email || !password || !confirm_password || !username) {
       return NextResponse.json(
         { status: false, pesan: "Semua field wajib diisi!" },
@@ -99,7 +98,6 @@ export async function POST(req) {
       );
     }
 
-    // Register user ke auth Supabase
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -112,7 +110,6 @@ export async function POST(req) {
       );
     }
 
-    // Insert detail user ke tabel "users"
     const userId = data.user.id;
 
     const { error: insertError } = await supabase.from("users").insert([

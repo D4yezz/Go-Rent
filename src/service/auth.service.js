@@ -20,23 +20,23 @@ export const login = async (payload) => {
   }
 };
 
-// export const register = async (payload) => {
-//   try {
-//     const response = await api.post("/register", payload);
-//     return response.data;
-//   } catch (error) {
-//     console.error("Register service error:", error);
+export const register = async (payload) => {
+  try {
+    const response = await api.post("/register", payload);
+    return response.data;
+  } catch (error) {
+    console.error("Register service error:", error);
 
-//     if (axios.isAxiosError(error) && error.response) {
-//       return error.response.data;
-//     }
+    if (axios.isAxiosError(error) && error.response) {
+      return error.response.data;
+    }
 
-//     return {
-//       status: false,
-//       pesan: "Network error",
-//     };
-//   }
-// };
+    return {
+      status: false,
+      pesan: "Network error",
+    };
+  }
+};
 export const registerUser = async (payload) => {
   try {
     const response = await api.post("/register", payload);

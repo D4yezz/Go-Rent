@@ -9,7 +9,7 @@ export const navigasi = [
   },
   {
     title: "Kontak",
-    href: "#kontak",
+    href: "/#kontak",
   },
 ];
 

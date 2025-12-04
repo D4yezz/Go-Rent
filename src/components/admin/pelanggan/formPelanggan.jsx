@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import supabase from "@/lib/supabase/client";
 import { toast } from "sonner";
-import { register } from "@/service/auth.service";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -26,6 +25,7 @@ import {
 } from "@/components/ui/input-group";
 import { Eye, EyeOff, PlusCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { registerUser } from "@/service/auth.service";
 
 export default function FormPelanggan({ onSuccess }) {
   const TABLE = "users";
@@ -49,10 +49,12 @@ export default function FormPelanggan({ onSuccess }) {
         return;
       }
 
-      const authRes = await register({
+      const authRes = await registerUser({
         email: email.trim(),
         password: password,
         confirm_password: password,
+        username: username,
+        no_hp: noHp,
       });
 
       if (!authRes.status) {
@@ -60,19 +62,19 @@ export default function FormPelanggan({ onSuccess }) {
         return;
       }
 
-      const userId = authRes.data.user.id;
+      // const userId = authRes.data.user.id;
 
-      const payload = {
-        id: userId,
-        username,
-        nama_lengkap: namaLengkap,
-        email: email.trim(),
-        no_hp: noHp,
-        role,
-      };
+      // const payload = {
+      //   id: userId,
+      //   username,
+      //   nama_lengkap: namaLengkap,
+      //   email: email.trim(),
+      //   no_hp: noHp,
+      //   role,
+      // };
 
-      const { data, error } = await supabase.from(TABLE).insert([payload]);
-      if (error) throw error;
+      // const { data, error } = await supabase.from(TABLE).insert([payload]);
+      // if (error) throw error;
 
       toast.success("Pelanggan berhasil ditambahkan");
       setOpen(false);

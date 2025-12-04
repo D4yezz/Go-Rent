@@ -187,7 +187,7 @@ export default function FormCar({
 
           {kendaraanDetails && (
             <div className="bg-sky-50 p-4 rounded-lg text-sm">
-              <p className="font-medium">{kendaraanDetails.merek}</p>
+              <p className="font-medium">{kendaraanDetails.merk}</p>
               <div className="grid grid-cols-2 gap-2 mt-2">
                 <p>Jenis: {kendaraanDetails.jenis}</p>
                 <p>Transmisi: {kendaraanDetails.transmisi}</p>
