@@ -9,7 +9,7 @@ const supabase = createClient(
       autoRefreshToken: true,
       persistSession: true,
     },
-  } 
+  }
 );
 
 export const supabaseService = supabase.auth.admin;

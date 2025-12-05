@@ -1,3 +1,4 @@
+"use client";
 import {
   InputGroup,
   InputGroupAddon,
@@ -23,6 +24,7 @@ export default function FormLogin() {
 
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("callbackUrl");
+  const error = searchParams.get("error");
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -59,6 +61,7 @@ export default function FormLogin() {
 
   return (
     <div className="flex w-full min-h-screen items-center justify-center bg-cyan-sky p-4 font-instrument-sans">
+      {error && <p>{error}</p>}
       <form
         onSubmit={handleLogin}
         className="w-full max-w-md p-8 shadow-2xl rounded-lg bg-white"
