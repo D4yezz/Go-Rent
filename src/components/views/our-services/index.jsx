@@ -5,13 +5,16 @@ import Image from "next/image";
 
 export default function OurService() {
   return (
-    <section id="service" className="w-full mx-auto px-12 py-12 font-onest">
+    <section
+      id="service"
+      className="w-full mx-auto lg:px-12 px-4 py-12 font-onest"
+    >
       <h1 className="text-5xl py-2 font-bold bg-cyan-sky bg-clip-text text-transparent w-full text-center my-12 font-geist-sans">
         Layanan Kami
       </h1>
-      <div className="flex flex-col gap-4 w-full h-[140vh] rounded-lg overflow-hidden shadow-lg">
-        <div className="flex items-center gap-4 h-1/2">
-          <div className="flex flex-col justify-center gap-3 w-[40%] h-full bg-cyan-sky p-12">
+      <div className="flex flex-col gap-4 w-full lg:h-[140vh] h-fit rounded-lg overflow-hidden shadow-lg">
+        <div className="flex lg:flex-row flex-col items-center gap-4 lg:h-1/2 w-full">
+          <div className="flex flex-col justify-center gap-3 lg:w-[40%] w-full h-full bg-cyan-sky p-12 lg:order-1 order-2">
             <h2 className="text-white font-semibold text-2xl">
               Sewa Mobil Harian
             </h2>
@@ -26,7 +29,7 @@ export default function OurService() {
               <p>Daily</p>
             </div>
           </div>
-          <div className="w-[60%] h-full">
+          <div className="lg:w-[60%] w-full h-full lg:order-2 order-1">
             <Image
               src="/our-services/4.jpg"
               alt="our-service"
@@ -36,8 +39,8 @@ export default function OurService() {
             />
           </div>
         </div>
-        <div className="flex items-center gap-4 h-1/2">
-          <div className="w-[60%] h-full">
+        <div className="flex lg:flex-row flex-col items-center gap-4 lg:h-1/2">
+          <div className="lg:w-[60%] w-full h-full">
             <Image
               src="/our-services/1.jpg"
               alt="our-service"
@@ -46,7 +49,7 @@ export default function OurService() {
               className="w-full h-full object-cover object-bottom"
             />
           </div>
-          <div className="flex flex-col justify-center gap-3 w-[40%] h-full bg-cyan-sky p-12">
+          <div className="flex flex-col justify-center gap-3 lg:w-[40%] h-full bg-cyan-sky p-12">
             <h2 className="text-white font-semibold text-2xl">
               Armada Selalu Terawat dan Bersih
             </h2>

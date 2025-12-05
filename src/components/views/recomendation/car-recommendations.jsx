@@ -3,11 +3,13 @@ import CarCard from "./car-card";
 import supabase from "@/lib/supabase/client";
 import { CircleArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
+import useMediaQuery from "@/hooks/useMediaQuery";
 
 export default function CarRecommendations() {
   const [mobil, setMobil] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const isDekstop = useMediaQuery("(min-width: 1024px)");
 
   useEffect(() => {
     const getMobil = async () => {
@@ -27,10 +29,10 @@ export default function CarRecommendations() {
   }, []);
 
   return (
-    <section className="w-full mx-auto px-12 py-12 font-geist-sans">
-      <div className="mb-8 w-full flex items-center justify-between">
-        <div className="flex  flex-col">
-          <h2 className="text-4xl font-bold bg-cyan-sky bg-clip-text text-transparent">
+    <section className="w-full mx-auto lg:px-12 px-4 py-12 font-geist-sans">
+      <div className="mb-8 w-full flex items-center justify-between lg:gap-0 gap-8">
+        <div className="flex flex-col">
+          <h2 className="lg:text-4xl text-2xl font-bold bg-cyan-sky bg-clip-text text-transparent">
             Rekomendasi Kendaraan
           </h2>
           <p className="mt-2 text-gray-600">
@@ -38,7 +40,17 @@ export default function CarRecommendations() {
             perjalanan Anda
           </p>
         </div>
-        <Link href="/cars" className="flex items-center gap-2 text-sky-600 text-lg"><CircleArrowRight size={20} /> Semua Kendaraan</Link>
+        <Link
+          href="/cars"
+          className="flex items-center gap-2 text-sky-600 lg:text-lg"
+        >
+          {isDekstop ? (
+            <CircleArrowRight size={20} />
+          ) : (
+            <CircleArrowRight size={30} />
+          )}{" "}
+          Semua Kendaraan
+        </Link>
       </div>
 
       {loading ? (

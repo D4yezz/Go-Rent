@@ -35,8 +35,8 @@ export default function Footer() {
   return (
     <footer id="kontak" className="bg-sky-800 text-sky-100 mt-20 font-rethink">
       <div className="container mx-auto px-4 py-16">
-        <div className="flex items-start justify-between gap-8 mb-12">
-          <div className="pr-4 h-full w-[30%]">
+        <div className="flex lg:flex-row flex-col items-start justify-between gap-8 lg:mb-12 mb-8">
+          <div className="pr-4 h-full lg:w-[30%] w-full">
             <h3 className="text-xl font-bold mb-4 text-white">Tentang Kami</h3>
             <p className="text-sky-200 text-[1rem] leading-relaxed">
               Kami menyediakan layanan penyewaan mobil terbaik dengan mobil
@@ -83,7 +83,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-sky-200 py-8"></div>
+        <div className="border-t border-sky-200 lg:py-8 py-4"></div>
 
         <div className="flex items-center justify-center w-full">
           <p className="text-sky-300 text-sm">
