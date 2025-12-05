@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import CarCard from "../recomendation/car-card";
 import { AnimatePresence } from "framer-motion";
 import FormCar from "./formCar";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AllCars() {
   const [mobil, setMobil] = useState([]);
@@ -31,7 +32,7 @@ export default function AllCars() {
     getMobil();
   }, []);
   return (
-    <section className="w-full mx-auto px-12 py-12 font-onest space-y-4">
+    <section className="w-full mx-auto lg:px-12 px-4 py-12 font-onest space-y-4">
       <div className="flex flex-col gap-4 w-full">
         <div className="flex gap-2 items-center">
           <h1 className="text-5xl font-bold bg-cyan-sky bg-clip-text text-transparent">
@@ -44,30 +45,35 @@ export default function AllCars() {
           Silakan pilih mobil yang ingin Anda sewa.
         </p>
       </div>
-      <div className="grid grid-cols-3 gap-4 py-4">
-        {mobil.map((item) => (
-          <CarCard
-            key={item.id}
-            mobilId={item.id} // Tambahkan ini
-            merk={item.merk}
-            jenis={item.jenis}
-            warna={item.warna}
-            harga_per_hari={item.harga_per_hari}
-            status={item.status}
-            transmisi={item.transmisi}
-            image={item.foto_url}
-            home={false}
-            showForm={showForm}
-            setShowForm={setShowForm}
-          />
-        ))}
-      </div>
+      {loading ? (
+        <Skeleton className={"w-full h-[400px]"} />
+      ) : (
+        <div className="grid lg:grid-cols-3 grid-cols-1 lg:gap-4 gap-8 py-4">
+          {mobil.map((item) => (
+            <CarCard
+              key={item.id}
+              mobilId={item.id} // Tambahkan ini
+              merk={item.merk}
+              jenis={item.jenis}
+              warna={item.warna}
+              harga_per_hari={item.harga_per_hari}
+              status={item.status}
+              transmisi={item.transmisi}
+              image={item.foto_url}
+              home={false}
+              showForm={showForm}
+              setShowForm={setShowForm}
+            />
+          ))}
+        </div>
+      )}
+
       <AnimatePresence>
         {showForm ? (
           <FormCar
             showForm={showForm}
             setShowForm={setShowForm}
-            idMobil={showForm} 
+            idMobil={showForm}
           />
         ) : null}
       </AnimatePresence>

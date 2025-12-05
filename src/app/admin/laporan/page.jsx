@@ -202,7 +202,7 @@ export default function LaporanPage() {
       />
 
       <div className="flex flex-col px-8 mt-6 mb-20 gap-4 font-schibsted-grotesk  ">
-        <div className="flex flex-col md:flex-row gap-4 items-end">
+        <div className="flex flex-row lg:flex-nowrap md:flex-wrap flex-wrap gap-4 items-end">
           <div className="flex gap-2 items-center">
             <label className="text-sm">Dari</label>
             <Input
