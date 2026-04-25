@@ -57,15 +57,15 @@ export default function CustomerPage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Pelanggan</BreadcrumbPage>
+                <BreadcrumbPage>Pengguna</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
         </div>
       </header>
       <HeaderAdmin
-        title={"Data Pelanggan"}
-        desc={"Kelola pelanggan yang akan disewakan dengan praktis"}
+        title={"Data Pengguna"}
+        desc={"Kelola pengguna yang terdaftar di Go - Rent"}
         action={<FormPelanggan onSuccess={getAllUser} />}
       />
       <div className="flex flex-col px-8 mt-8 mb-20 gap-4">

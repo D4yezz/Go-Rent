@@ -100,7 +100,7 @@ export default function FormPelanggan({ onSuccess }) {
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button className="bg-cyan-sky text-white rounded-md">
-          <PlusCircle size={20} /> Tambah Pelanggan
+          <PlusCircle size={20} /> Tambah Pengguna
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-lg font-rethink">
