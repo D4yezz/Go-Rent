@@ -56,20 +56,20 @@ export default function LaporanPage() {
       const { data: res, error } = await supabase
         .from("pemesanan")
         .select(
-          "id, user_id (id, username, nama_lengkap), kendaraan_id (id, merk, jenis), tanggal_mulai, tanggal_selesai, total_harga, status, created_at"
+          "id, user_id (id, username, nama_lengkap), kendaraan_id (id, merk, jenis), tanggal_mulai, tanggal_selesai, total_harga, status, created_at",
         )
         .order("created_at", { ascending: false });
 
       if (error) throw error;
 
       const fokus = (res || []).filter((r) =>
-        ["selesai", "dibatalkan"].includes(r.status)
+        ["selesai", "dibatalkan"].includes(r.status),
       );
 
       setData(fokus || []);
 
       const jenis = Array.from(
-        new Set((res || []).map((r) => r.kendaraan_id?.jenis).filter(Boolean))
+        new Set((res || []).map((r) => r.kendaraan_id?.jenis).filter(Boolean)),
       );
       setJenisList(jenis);
 
@@ -120,16 +120,16 @@ export default function LaporanPage() {
             r.kendaraan_id?.merk || "-"
           }</td>
           <td style='padding:8px;border:1px solid #ddd'>${new Date(
-            r.tanggal_mulai
+            r.tanggal_mulai,
           ).toLocaleDateString("id-ID")}</td>
           <td style='padding:8px;border:1px solid #ddd'>${new Date(
-            r.tanggal_selesai
+            r.tanggal_selesai,
           ).toLocaleDateString("id-ID")}</td>
           <td style='padding:8px;border:1px solid #ddd'>Rp ${new Intl.NumberFormat(
-            "id-ID"
+            "id-ID",
           ).format(r.total_harga)}</td>
           <td style='padding:8px;border:1px solid #ddd'>${r.status}</td>
-        </tr>`
+        </tr>`,
       )
       .join("");
 
@@ -227,7 +227,7 @@ export default function LaporanPage() {
               <SelectValue placeholder="Pilih status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
+              <SelectGroup className={"font-instrument-sans"}>
                 <SelectLabel>Status</SelectLabel>
                 <SelectItem value="all">Semua</SelectItem>
                 <SelectItem value="selesai">Selesai</SelectItem>
@@ -243,7 +243,7 @@ export default function LaporanPage() {
               <SelectValue placeholder="Pilih jenis" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
+              <SelectGroup className={"font-instrument-sans"}>
                 <SelectLabel>Jenis kendaraan</SelectLabel>
                 <SelectItem value="all">Semua</SelectItem>
                 {jenisList.map((j) => (
@@ -262,7 +262,7 @@ export default function LaporanPage() {
               <SelectValue placeholder="Nama petugas" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
+              <SelectGroup className={"font-instrument-sans"}>
                 <SelectLabel>Nama petugas</SelectLabel>
                 <SelectItem value="all">Semua</SelectItem>
                 {petugasList.map((p) => (

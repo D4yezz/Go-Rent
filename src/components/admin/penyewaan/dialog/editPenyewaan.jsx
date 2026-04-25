@@ -24,7 +24,7 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
 
   const [tanggalMulai, setTanggalMulai] = useState(item?.tanggal_mulai || "");
   const [tanggalSelesai, setTanggalSelesai] = useState(
-    item?.tanggal_selesai || ""
+    item?.tanggal_selesai || "",
   );
   const [status, setStatus] = useState(item?.status || "pending");
   const [totalHarga, setTotalHarga] = useState(item?.total_harga || 0);
@@ -89,7 +89,7 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
     } catch (err) {
       console.error("Error updating Penyewaan:", err);
       toast.error(
-        "Gagal memperbarui Penyewaan: " + (err.message || JSON.stringify(err))
+        "Gagal memperbarui Penyewaan: " + (err.message || JSON.stringify(err)),
       );
     } finally {
       setIsLoading(false);
@@ -177,7 +177,7 @@ export default function EditPenyewaan({ item, onClose, onSuccess }) {
               <SelectValue placeholder="Status" />
             </SelectTrigger>
             <SelectContent>
-              <SelectGroup>
+              <SelectGroup className={"font-instrument-sans"}>
                 <SelectItem value="menunggu">Menunggu</SelectItem>
                 <SelectItem value="disewa">Disewa</SelectItem>
                 <SelectItem value="selesai">Selesai</SelectItem>

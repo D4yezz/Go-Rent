@@ -77,7 +77,7 @@ export default function FormCar({
   useEffect(() => {
     if (selectedKendaraan) {
       const found = kendaraanList.find(
-        (k) => k.id?.toString() === selectedKendaraan
+        (k) => k.id?.toString() === selectedKendaraan,
       );
       setKendaraanDetails(found || null);
     } else {
@@ -177,7 +177,11 @@ export default function FormCar({
               </SelectTrigger>
               <SelectContent>
                 {kendaraanList.map((item, index) => (
-                  <SelectItem key={index} value={item?.id}>
+                  <SelectItem
+                    key={index}
+                    value={item?.id}
+                    className={"font-instrument-sans"}
+                  >
                     {item?.merk} ({formatCurrency(item?.harga_per_hari)}/hari)
                   </SelectItem>
                 ))}
@@ -229,7 +233,7 @@ export default function FormCar({
                 <span>
                   {Math.ceil(
                     (new Date(tanggalSelesai) - new Date(tanggalMulai)) /
-                      (1000 * 60 * 60 * 24)
+                      (1000 * 60 * 60 * 24),
                   )}{" "}
                   hari
                 </span>

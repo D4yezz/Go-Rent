@@ -123,7 +123,7 @@ export default function FormKendaraan({ onSuccess }) {
     } catch (err) {
       console.error("Error adding kendaraan:", err);
       toast.error(
-        "Gagal menambahkan kendaraan: " + (err.message || JSON.stringify(err))
+        "Gagal menambahkan kendaraan: " + (err.message || JSON.stringify(err)),
       );
     } finally {
       setIsLoading(false);
@@ -228,7 +228,7 @@ export default function FormKendaraan({ onSuccess }) {
                 <SelectTrigger className="w-full">
                   <SelectValue placeholder="Manual" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className={"font-instrument-sans"}>
                   <SelectItem value="Manual">Manual</SelectItem>
                   <SelectItem value="Otomatis">Otomatis</SelectItem>
                 </SelectContent>

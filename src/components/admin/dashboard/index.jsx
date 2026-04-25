@@ -102,8 +102,6 @@ export default function DashboardView({ role = "admin" }) {
     getData();
   }, [role]);
 
-  console.log(data);
-
   return (
     <div className="grid lg:grid-cols-2 grid-col-1 items-center gap-4 font-rethink">
       {data.map((item, index) => {

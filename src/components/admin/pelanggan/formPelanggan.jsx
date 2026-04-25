@@ -85,11 +85,11 @@ export default function FormPelanggan({ onSuccess }) {
       setNoHp("");
       setRole("user");
 
-      if (typeof onSuccess === "function") onSuccess(data);
+      if (typeof onSuccess === "function") onSuccess();
     } catch (err) {
       console.error(err);
       toast.error(
-        "Gagal menambahkan pelanggan: " + (err.message || JSON.stringify(err))
+        "Gagal menambahkan pelanggan: " + (err.message || JSON.stringify(err)),
       );
     } finally {
       setIsLoading(false);
@@ -193,7 +193,7 @@ export default function FormPelanggan({ onSuccess }) {
               <SelectTrigger className="w-full">
                 <SelectValue placeholder="Pilih Role" />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className={"font-instrument-sans"}>
                 <SelectItem value="user">Pelanggan</SelectItem>
                 <SelectItem value="petugas">Petugas</SelectItem>
                 <SelectItem value="admin">Admin</SelectItem>
