@@ -24,7 +24,10 @@ export default function CustomerPage() {
   const getAllUser = useCallback(async () => {
     setLoading(true);
     try {
-      const { data, error } = await supabase.from("users").select("*");
+      const { data, error } = await supabase
+        .from("users")
+        .select("*")
+        .order("created_at", { ascending: false });
       if (error) {
         toast.error(error?.message || null);
       } else {

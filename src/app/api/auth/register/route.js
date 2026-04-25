@@ -79,22 +79,30 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function POST(req) {
   const supabase = await createClient();
+  const ALLOW_ROLE = ["user", "petugas", "admin"];
 
   try {
-    const { email, password, confirm_password, username, no_hp } =
-      await req.json();
+    const {
+      email,
+      password,
+      confirm_password,
+      username,
+      nama_lengkap,
+      no_hp,
+      role,
+    } = await req.json();
 
     if (!email || !password || !confirm_password || !username) {
       return NextResponse.json(
         { status: false, pesan: "Semua field wajib diisi!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (password !== confirm_password) {
       return NextResponse.json(
         { status: false, pesan: "Password dan konfirmasi tidak sama!" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -106,7 +114,7 @@ export async function POST(req) {
     if (error) {
       return NextResponse.json(
         { status: false, pesan: error.message },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -116,16 +124,17 @@ export async function POST(req) {
       {
         id: userId,
         username,
+        nama_lengkap,
         email,
         no_hp,
-        role: "user",
+        role: ALLOW_ROLE.includes(role) ? role : "user",
       },
     ]);
 
     if (insertError) {
       return NextResponse.json(
         { status: false, pesan: insertError.message },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -138,7 +147,7 @@ export async function POST(req) {
     console.error(err);
     return NextResponse.json(
       { status: false, pesan: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

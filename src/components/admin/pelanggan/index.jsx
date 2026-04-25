@@ -20,7 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MoreHorizontal, ScanEye, SquarePen, Trash } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ViewPelanggan from "./dialog/viewPelanggan";
 import EditPelanggan from "./dialog/editPelanggan";
@@ -39,6 +39,7 @@ import {
 import { toast } from "sonner";
 import supabase from "@/lib/supabase/client";
 import { supabaseService } from "@/lib/supabase/admin";
+import { getProfileUser } from "@/service/auth.service";
 
 export default function PelangganTable({ pelanggan, loading, onSuccess }) {
   const [deletingId, setDeletingId] = useState(null);
@@ -46,8 +47,17 @@ export default function PelangganTable({ pelanggan, loading, onSuccess }) {
   const [editItem, setEditItem] = useState(null);
   const [editOpen, setEditOpen] = useState(false);
   const [openDialogId, setOpenDialogId] = useState(null);
-  //   const [createRefreshToggle, setCreateRefreshToggle] = useState(false);
+  const [userId, setUserId] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      const res = await getProfileUser();
+      if (res.status && res.data) {
+        setUserId(res.data.profile.id);
+      }
+    };
 
+    getUserData();
+  }, []);
   const deleteUser = async (userId) => {
     try {
       setDeletingId(userId);
@@ -65,7 +75,7 @@ export default function PelangganTable({ pelanggan, loading, onSuccess }) {
     } catch (err) {
       console.error(err);
       toast.error(
-        "Gagal menghapus pelanggan: " + (err.message || JSON.stringify(err))
+        "Gagal menghapus pelanggan: " + (err.message || JSON.stringify(err)),
       );
     } finally {
       setDeletingId(null);
@@ -80,7 +90,7 @@ export default function PelangganTable({ pelanggan, loading, onSuccess }) {
     if (item.role === "admin") {
       return <Badge className={"bg-red-500"}>Admin</Badge>;
     } else if (item.role === "petugas") {
-      return <Badge className={"bg-sky-500"}>Admin</Badge>;
+      return <Badge className={"bg-sky-500"}>Petugas</Badge>;
     } else {
       return <Badge className={"bg-green-500"}>Pelanggan</Badge>;
     }
@@ -153,37 +163,41 @@ export default function PelangganTable({ pelanggan, loading, onSuccess }) {
                   >
                     <SquarePen className="w-4 h-4" />
                   </Button>
-                  <AlertDialog
-                    open={openDialogId === item.id}
-                    onOpenChange={(open) => {
-                      if (!open && deletingId === item.id) return;
-                      setOpenDialogId(open ? item.id : null);
-                    }}
-                  >
-                    <AlertDialogTrigger className="bg-red-600 hover:bg-red-800 text-white p-2.5 h-auto rounded-md flex items-center justify-center cursor-pointer">
-                      <Trash className="w-4 h-4" />
-                    </AlertDialogTrigger>
-                    <AlertDialogContent className={"font-schibsted-grotesk"}>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>Apakah anda yakin?</AlertDialogTitle>
-                        <AlertDialogDescription>
-                          Akun ini akan dihapus secara permanen.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel disabled={deletingId === item.id}>
-                          Batal
-                        </AlertDialogCancel>
-                        <Button
-                          className="bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer font-medium hover:bg-red-700"
-                          onClick={() => deleteUser(item.id)}
-                          disabled={deletingId === item.id}
-                        >
-                          {deletingId === item.id ? "Menghapus..." : "Hapus"}
-                        </Button>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+                  {userId === "bc628de3-d295-4777-97ee-5b788927e167" && (
+                    <AlertDialog
+                      open={openDialogId === item.id}
+                      onOpenChange={(open) => {
+                        if (!open && deletingId === item.id) return;
+                        setOpenDialogId(open ? item.id : null);
+                      }}
+                    >
+                      <AlertDialogTrigger className="bg-red-600 hover:bg-red-800 text-white p-2.5 h-auto rounded-md flex items-center justify-center cursor-pointer">
+                        <Trash className="w-4 h-4" />
+                      </AlertDialogTrigger>
+                      <AlertDialogContent className={"font-schibsted-grotesk"}>
+                        <AlertDialogHeader>
+                          <AlertDialogTitle>
+                            Apakah anda yakin?
+                          </AlertDialogTitle>
+                          <AlertDialogDescription>
+                            Akun ini akan dihapus secara permanen.
+                          </AlertDialogDescription>
+                        </AlertDialogHeader>
+                        <AlertDialogFooter>
+                          <AlertDialogCancel disabled={deletingId === item.id}>
+                            Batal
+                          </AlertDialogCancel>
+                          <Button
+                            className="bg-red-600 text-white px-4 py-2 rounded-md cursor-pointer font-medium hover:bg-red-700"
+                            onClick={() => deleteUser(item.id)}
+                            disabled={deletingId === item.id}
+                          >
+                            {deletingId === item.id ? "Menghapus..." : "Hapus"}
+                          </Button>
+                        </AlertDialogFooter>
+                      </AlertDialogContent>
+                    </AlertDialog>
+                  )}
                 </div>
               </TableCell>
             </TableRow>

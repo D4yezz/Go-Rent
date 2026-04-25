@@ -54,7 +54,9 @@ export default function FormPelanggan({ onSuccess }) {
         password: password,
         confirm_password: password,
         username: username,
+        nama_lengkap: namaLengkap,
         no_hp: noHp,
+        role,
       });
 
       if (!authRes.status) {
@@ -105,7 +107,7 @@ export default function FormPelanggan({ onSuccess }) {
       </DialogTrigger>
       <DialogContent className="max-w-lg font-rethink">
         <DialogHeader>
-          <DialogTitle>Tambah Pelanggan Baru</DialogTitle>
+          <DialogTitle>Tambah Pengguna Baru</DialogTitle>
         </DialogHeader>
 
         <form
